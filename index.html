@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fingerprint Access System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="overlay">
+        <h1>AI-Based Fingerprint Recognition</h1>
+
+        <div id="scanner" class="fingerprint"></div>
+
+        <button onclick="startScan()">Scan Fingerprint</button>
+    </div>
+
+    <script>
+    async function startScan() {
+        const response = await fetch('/scan');
+        const data = await response.json();
+        const scanner = document.getElementById('scanner');
+
+        if (data.status === 'success') {
+            scanner.classList.remove('fail');
+            scanner.classList.add('success');
+        } else {
+            scanner.classList.remove('success');
+            scanner.classList.add('fail');
+        }
+    }
+</script>
+</body>
+</html>
